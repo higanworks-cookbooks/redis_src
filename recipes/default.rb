@@ -53,8 +53,14 @@ script "make_redis_from_source" do
   notifies :restart, "service[redis-server]"
 end
 
+if node['redis']['version'] < 2.6
+  config_template = "redis24.conf.erb"
+else
+  config_template = "redis.conf.erb"
+end
+
 template "/usr/local/etc/redis/redis.conf" do
-  source "redis.conf.erb"
+  source config_template
   owner "redis"
   notifies :restart, "service[redis-server]"
 end
