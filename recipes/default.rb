@@ -53,7 +53,7 @@ script "make_redis_from_source" do
   notifies :restart, "service[redis-server]"
 end
 
-if node['redis']['version'] < 2.6
+if node['redis']['version'] < "2.6.0"
   config_template = "redis24.conf.erb"
 else
   config_template = "redis.conf.erb"
