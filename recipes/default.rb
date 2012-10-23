@@ -24,8 +24,10 @@ end
 
 
 ## tcl8.5 install for make test
-package "tcl8.5" do
-    action :install
+%w( build-essential tcl8.5 ).each do |w|
+  package w do
+      action :install
+  end
 end
 
 script "make_redis_from_source" do
